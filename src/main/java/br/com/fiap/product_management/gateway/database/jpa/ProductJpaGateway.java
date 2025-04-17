@@ -45,7 +45,7 @@ public class ProductJpaGateway implements ProductGateway {
         }
 
         ProductEntity productSaved = productRepository.save(new ProductEntity(product));
-        productSaved.setSku(SkuGenerator.generateSKU(productSaved.getId()));
+        productSaved.setSKU(SkuGenerator.generateSKU(productSaved.getId()));
 
         ProductEntity productEntity = productRepository.save(productSaved);
         return productEntity.toDomain();

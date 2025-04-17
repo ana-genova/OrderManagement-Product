@@ -52,11 +52,11 @@ public class ProductEntity {
         this.name = name;
     }
 
-    public String getSku() {
+    public String getSKU() {
         return sku;
     }
 
-    public void setSku(String sku) {
+    public void setSKU(String sku) {
         this.sku = sku;
     }
 

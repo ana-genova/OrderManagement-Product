@@ -8,6 +8,6 @@ public class SkuGenerator {
 
     public static String generateSKU(Long productId) {
         String datePart = dateFormat.format(new Date());
-        return datePart + "-" + String.format("%04d", productId);
+        return datePart + "-" + String.format("%05d", productId);
     }
 }
