@@ -2,6 +2,8 @@ package br.com.fiap.product_management.domain;
 
 import io.micrometer.common.util.StringUtils;
 
+import java.util.Objects;
+
 public class Product {
 
     private Long id;
@@ -14,7 +16,6 @@ public class Product {
     public Product(Long id, String name, String description, String sku, Double price, int quantity) {
         validateProductId(id);
         validateProductName(name);
-        validateProductSKU(sku);
         validateProductPrice(price);
         validateProductQuantity(quantity);
 
@@ -28,7 +29,6 @@ public class Product {
 
     public Product(String name, String description, String sku, Double price, int quantity) {
         validateProductName(name);
-        validateProductSKU(sku);
         validateProductPrice(price);
         validateProductQuantity(quantity);
 
@@ -48,12 +48,6 @@ public class Product {
     private void validateProductName(String name) {
         if (StringUtils.isBlank(name)) {
             throw new IllegalArgumentException("Name is required");
-        }
-    }
-
-    private void validateProductSKU(String sku) {
-        if (StringUtils.isBlank(sku)) {
-            throw new IllegalArgumentException("SKU is required");
         }
     }
 
@@ -95,5 +89,22 @@ public class Product {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public Product updateFields(Product newFields) {
+        if (!Objects.equals(this.id, newFields.id)) {
+            throw new IllegalArgumentException("Id cannot be changed");
+        }
+
+        if (this.sku != null && !this.sku.equals(newFields.sku)) {
+            throw new IllegalArgumentException("SKU cannot be changed");
+        }
+
+        this.name = newFields.name;
+        this.description = newFields.description;
+        this.price = newFields.price;
+        this.quantity = newFields.quantity;
+
+        return this;
     }
 }
