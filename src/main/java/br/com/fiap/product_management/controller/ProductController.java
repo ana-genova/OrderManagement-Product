@@ -50,6 +50,22 @@ public class ProductController {
         return new ProductDto(productJpaGateway.update(updatedProduct));
     }
 
+    @PutMapping("/{id}/stock/{quantity}")
+    public ProductDto updateStockLow(@PathVariable("id") Long productId, @PathVariable("quantity") int quantity) {
+        Product product = productJpaGateway.findById(productId);
+        Product updatedProduct = UpdateProductUseCase.stock(product, quantity);
+
+        return new ProductDto(productJpaGateway.update(updatedProduct));
+    }
+
+    @PutMapping("/{id}/stock/{quantity}/recover")
+    public ProductDto updateStockRecover(@PathVariable("id") Long productId, @PathVariable("quantity") int quantity) {
+        Product product = productJpaGateway.findById(productId);
+        Product updatedProduct = UpdateProductUseCase.stockRecover(product,quantity);
+
+        return new ProductDto(productJpaGateway.update(updatedProduct));
+    }
+
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable("id") Long productId) {
         Product product = productJpaGateway.findById(productId);

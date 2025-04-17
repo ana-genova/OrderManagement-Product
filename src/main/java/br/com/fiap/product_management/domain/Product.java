@@ -91,6 +91,10 @@ public class Product {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public Product updateFields(Product newFields) {
         if (!Objects.equals(this.id, newFields.id)) {
             throw new IllegalArgumentException("Id cannot be changed");
