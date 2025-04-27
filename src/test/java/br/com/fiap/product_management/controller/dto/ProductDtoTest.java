@@ -12,8 +12,7 @@ public class ProductDtoTest {
     private final String defaultDescription = "Caneca Stan Branca";
     private final String defaultSku = "250417-0001";
     private final Double defaultPrice = 199.99;
-    private final int defaultQuantity = 5;
-    private final Product product = new Product(defaultId, defaultName, defaultDescription, defaultSku, defaultPrice, defaultQuantity);
+    private final Product product = new Product(defaultId, defaultName, defaultDescription, defaultSku, defaultPrice);
 
     @Test
     void createsProductEntity() {
@@ -24,7 +23,6 @@ public class ProductDtoTest {
         assertEquals(product.getDescription(), productDto.description());
         assertEquals(product.getSKU(), productDto.sku());
         assertEquals(product.getPrice(), productDto.price());
-        assertEquals(product.getQuantity(), productDto.quantity());
     }
 
 

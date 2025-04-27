@@ -25,7 +25,6 @@ public class ProductJpaGatewayTest {
     private final String defaultName = "Caneca";
     private final String defaultDescription = "Caneca Stan Branca";
     private final Double defaultPrice = 199.99;
-    private final int defaultQuantity = 5;
 
     private ProductJpaGateway productJpaGateway;
 
@@ -46,7 +45,7 @@ public class ProductJpaGatewayTest {
 
     @Test
     void createProductAndFindProductById() {
-        Product product = new Product(defaultName, defaultDescription, null, defaultPrice, defaultQuantity);
+        Product product = new Product(defaultName, defaultDescription, null, defaultPrice);
         Product productSaved = productJpaGateway.create(product);
 
         Product productFind = productJpaGateway.findById(productSaved.getId());
@@ -56,7 +55,7 @@ public class ProductJpaGatewayTest {
 
     @Test
     void createProductAndFindProductBySKU() {
-        Product product = new Product(defaultName, defaultDescription, null, defaultPrice, defaultQuantity);
+        Product product = new Product(defaultName, defaultDescription, null, defaultPrice);
         Product productSaved = productJpaGateway.create(product);
 
         Product productFind = productJpaGateway.findBySKU(productSaved.getSKU());
@@ -66,30 +65,33 @@ public class ProductJpaGatewayTest {
 
     @Test
     void createProductAndUpdate() {
-        Product product = new Product(defaultName, defaultDescription, null, defaultPrice, defaultQuantity);
+        Product product = new Product(defaultName, defaultDescription, null, defaultPrice);
         Product productSaved = productJpaGateway.create(product);
 
-        int newQuantity = 2;
-        productSaved.setQuantity(newQuantity);
+        Double newPrice = 20.00;
+        productSaved.setPrice(newPrice);
         Product productUpdated = productJpaGateway.update(productSaved);
 
-        assertEquals(productUpdated.getQuantity(), newQuantity);
+        assertEquals(productUpdated.getPrice(), newPrice);
     }
 
     @Test
     void createProductAndDelete() {
-        Product product = new Product(defaultName, defaultDescription, null, defaultPrice, defaultQuantity);
+        Product product = new Product(defaultName, defaultDescription, null, defaultPrice);
         Product productSaved = productJpaGateway.create(product);
 
         productJpaGateway.delete(productSaved);
-        Product productFind = productJpaGateway.findById(productSaved.getId());
 
-        assertEquals(productFind.getQuantity(), 0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> productJpaGateway.findById(productSaved.getId()),
+                "Product not exists"
+        );
     }
 
     @Test
     void throwsExceptionWhenCreateProductAlreadyExists() {
-        Product product = new Product(1L, defaultName, defaultDescription, null, defaultPrice, defaultQuantity);
+        Product product = new Product(1L, defaultName, defaultDescription, null, defaultPrice);
         assertThrows(
                 IllegalArgumentException.class,
                 () -> productJpaGateway.create(product),
@@ -99,7 +101,7 @@ public class ProductJpaGatewayTest {
 
     @Test
     void throwsExceptionWhenUpdateProductNotFound() {
-        Product product = new Product(40000L, defaultName, defaultDescription, null, defaultPrice, defaultQuantity);
+        Product product = new Product(40000L, defaultName, defaultDescription, null, defaultPrice);
         assertThrows(
                 IllegalArgumentException.class,
                 () -> productJpaGateway.update(product),
@@ -109,7 +111,7 @@ public class ProductJpaGatewayTest {
 
     @Test
     void throwsExceptionWhenDeleteProductNotFound() {
-        Product product = new Product(40000L, defaultName, defaultDescription, null, defaultPrice, defaultQuantity);
+        Product product = new Product(40000L, defaultName, defaultDescription, null, defaultPrice);
         assertThrows(
                 IllegalArgumentException.class,
                 () -> productJpaGateway.delete(product),

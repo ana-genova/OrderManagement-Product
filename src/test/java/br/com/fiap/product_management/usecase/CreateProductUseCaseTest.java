@@ -13,11 +13,10 @@ public class CreateProductUseCaseTest {
     private final String defaultDescription = "Caneca Stan Branca";
     private final String defaultSku = "250417-0001";
     private final Double defaultPrice = 199.99;
-    private final int defaultQuantity = 5;
 
     @Test
     void shouldCreateClient() {
-        var result = CreateProductUseCase.create(this.defaultName, this.defaultDescription, this.defaultSku, this.defaultPrice, this.defaultQuantity);
+        var result = CreateProductUseCase.create(this.defaultName, this.defaultDescription, this.defaultSku, this.defaultPrice);
 
         assertInstanceOf(Product.class, result);
     }

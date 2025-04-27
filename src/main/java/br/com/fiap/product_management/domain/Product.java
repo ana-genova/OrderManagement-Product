@@ -11,32 +11,27 @@ public class Product {
     private String description;
     private final String sku;
     private Double price;
-    private int quantity;
 
-    public Product(Long id, String name, String description, String sku, Double price, int quantity) {
+    public Product(Long id, String name, String description, String sku, Double price) {
         validateProductId(id);
         validateProductName(name);
         validateProductPrice(price);
-        validateProductQuantity(quantity);
 
         this.id = id;
         this.name = name;
         this.description = description;
         this.sku = sku;
         this.price = price;
-        this.quantity = quantity;
     }
 
-    public Product(String name, String description, String sku, Double price, int quantity) {
+    public Product(String name, String description, String sku, Double price) {
         validateProductName(name);
         validateProductPrice(price);
-        validateProductQuantity(quantity);
 
         this.name = name;
         this.description = description;
         this.sku = sku;
         this.price = price;
-        this.quantity = quantity;
     }
 
     private void validateProductId(Long id) {
@@ -61,12 +56,6 @@ public class Product {
         }
     }
 
-    private void validateProductQuantity(int quantity) {
-        if (quantity < 0) {
-            throw new IllegalArgumentException("Quantity cannot be negative");
-        }
-    }
-
     public Long getId() {
         return id;
     }
@@ -87,12 +76,8 @@ public class Product {
         return price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Product updateFields(Product newFields) {
@@ -107,7 +92,6 @@ public class Product {
         this.name = newFields.name;
         this.description = newFields.description;
         this.price = newFields.price;
-        this.quantity = newFields.quantity;
 
         return this;
     }

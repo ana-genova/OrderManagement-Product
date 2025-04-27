@@ -79,8 +79,7 @@ public class ProductJpaGateway implements ProductGateway {
             throw new IllegalArgumentException("Product not found");
         }
 
-        productEntity.get().setQuantity(0);
-        productRepository.save(productEntity.get());
+        productRepository.delete(productEntity.get());
     }
 
 }

@@ -12,8 +12,7 @@ public class ProductEntityTest {
     private final String defaultDescription = "Caneca Stan Branca";
     private final String defaultSku = "250417-0001";
     private final Double defaultPrice = 199.99;
-    private final int defaultQuantity = 5;
-    private final Product product = new Product(defaultId, defaultName, defaultDescription, defaultSku, defaultPrice, defaultQuantity);
+    private final Product product = new Product(defaultId, defaultName, defaultDescription, defaultSku, defaultPrice);
 
     @Test
     void createsProductEntity() {
@@ -24,7 +23,6 @@ public class ProductEntityTest {
         assertEquals(product.getDescription(), productEntity.getDescription());
         assertEquals(product.getSKU(), productEntity.getSKU());
         assertEquals(product.getPrice(), productEntity.getPrice());
-        assertEquals(product.getQuantity(), productEntity.getQuantity());
     }
 
     @Test
@@ -36,21 +34,18 @@ public class ProductEntityTest {
         String newDescription = "Caderno Tilib Azul";
         String newSku = "250417-0002";
         Double newPrice = 99.99;
-        int newQuantity = 2;
 
         productEntity.setId(newId);
         productEntity.setName(newName);
         productEntity.setDescription(newDescription);
         productEntity.setSKU(newSku);
         productEntity.setPrice(newPrice);
-        productEntity.setQuantity(newQuantity);
 
         assertEquals(productEntity.getId(), newId);
         assertEquals(productEntity.getName(), newName);
         assertEquals(productEntity.getDescription(), newDescription);
         assertEquals(productEntity.getSKU(), newSku);
         assertEquals(productEntity.getPrice(), newPrice);
-        assertEquals(productEntity.getQuantity(), newQuantity);
     }
 
 }

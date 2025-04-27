@@ -37,7 +37,7 @@ public class ProductController {
 
     @PostMapping
     public ProductDto createProduct(@RequestBody ProductDto ProductDto) {
-        Product product = CreateProductUseCase.create(ProductDto.name(), ProductDto.description(), ProductDto.sku(), ProductDto.price(), ProductDto.quantity());
+        Product product = CreateProductUseCase.create(ProductDto.name(), ProductDto.description(), ProductDto.sku(), ProductDto.price());
 
         return new ProductDto(productJpaGateway.create(product));
     }
@@ -46,22 +46,6 @@ public class ProductController {
     public ProductDto updateProduct(@PathVariable("id") Long productId, @RequestBody ProductDto newProduct) {
         Product product = productJpaGateway.findById(productId);
         Product updatedProduct = UpdateProductUseCase.update(product, toDomain(newProduct, productId, product.getSKU()));
-
-        return new ProductDto(productJpaGateway.update(updatedProduct));
-    }
-
-    @PutMapping("/{id}/stock/{quantity}")
-    public ProductDto updateStockLow(@PathVariable("id") Long productId, @PathVariable("quantity") int quantity) {
-        Product product = productJpaGateway.findById(productId);
-        Product updatedProduct = UpdateProductUseCase.stock(product, quantity);
-
-        return new ProductDto(productJpaGateway.update(updatedProduct));
-    }
-
-    @PutMapping("/{id}/stock/{quantity}/recover")
-    public ProductDto updateStockRecover(@PathVariable("id") Long productId, @PathVariable("quantity") int quantity) {
-        Product product = productJpaGateway.findById(productId);
-        Product updatedProduct = UpdateProductUseCase.stockRecover(product,quantity);
 
         return new ProductDto(productJpaGateway.update(updatedProduct));
     }
@@ -78,8 +62,7 @@ public class ProductController {
                 ProductDto.name(),
                 ProductDto.description(),
                 sku,
-                ProductDto.price(),
-                ProductDto.quantity()
+                ProductDto.price()
         );
     }
 

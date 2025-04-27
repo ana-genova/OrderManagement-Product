@@ -14,7 +14,6 @@ public class ProductEntity {
     private String description;
     private String sku;
     private Double price;
-    private int quantity;
 
     public ProductEntity() {
     }
@@ -25,7 +24,6 @@ public class ProductEntity {
         this.description = product.getDescription();
         this.sku = product.getSKU();
         this.price = product.getPrice();
-        this.quantity = product.getQuantity();
     }
 
     public Long getId() {
@@ -68,15 +66,7 @@ public class ProductEntity {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public Product toDomain() {
-        return new Product(id, name, description, sku, price, quantity);
+        return new Product(id, name, description, sku, price);
     }
 }

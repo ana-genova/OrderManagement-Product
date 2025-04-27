@@ -6,9 +6,9 @@ import java.time.LocalDate;
 
 public class CreateProductUseCase {
 
-    public static Product create(String name, String description, String sku, Double price, int quantity) {
+    public static Product create(String name, String description, String sku, Double price) {
 
-        return new Product(name, description, sku, price, quantity);
+        return new Product(name, description, sku, price);
     }
 
 }
