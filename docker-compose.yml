@@ -10,3 +10,13 @@ services:
       - POSTGRES_DB=product-db
     ports:
       - "5433:5432"
+
+  product:
+    image: anagenova/ordermanagement-product
+    container_name: ordermanagement-product
+    environment:
+      - DB_URL=jdbc:postgresql://product-db:5432/product-db
+      - DB_USER=user
+      - DB_PASSWORD=password
+    ports:
+      - "8080:8080"
